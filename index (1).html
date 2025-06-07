@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>随机图片</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .image-fade-in {
+                animation: fadeIn 1.2s ease-in-out;
+            }
+            @keyframes fadeIn {
+                from { opacity: 0; }
+                to { opacity: 1; }
+            }
+        }
+    </style>
+</head>
+<body class="bg-dark m-0 p-0 overflow-hidden h-screen w-screen">
+    <div id="image-container" class="absolute inset-0 flex items-center justify-center">
+        <img id="random-image" src="" alt="随机图片" class="max-w-full max-h-full object-contain image-fade-in">
+    </div>
+
+    <script>
+        // 使用正确的 GitHub Raw 链接格式
+        const images = [
+            "https://raw.githubusercontent.com/vic0308/greatmind1/e235f187c2697356b9ed476b586c071eca061e89/1747494429155.jpeg",
+            "https://raw.githubusercontent.com/vic0308/greatmind1/e235f187c2697356b9ed476b586c071eca061e89/mmexport1749110883707.png",
+            "https://raw.githubusercontent.com/vic0308/greatmind1/e235f187c2697356b9ed476b586c071eca061e89/mmexport1749262471481.jpg"
+        ];
+        
+        const randomIndex = Math.floor(Math.random() * images.length);
+        const randomImage = document.getElementById('random-image');
+        
+        randomImage.src = images[randomIndex];
+        randomImage.onload = () => randomImage.classList.add('image-fade-in');
+        
+        randomImage.onerror = () => {
+            randomImage.src = "https://picsum.photos/1920/1080?random=error";
+            randomImage.alt = "图片加载失败";
+        };
+    </script>
+</body>
+</html>
+    
